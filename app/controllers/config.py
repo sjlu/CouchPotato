@@ -8,6 +8,7 @@ from app.lib.plex import PLEX
 from app.lib.prowl import PROWL
 from app.lib.growl import GROWL
 from app.lib.notifo import Notifo
+from app.lib.sns import SNS
 from app.lib.boxcar import Boxcar
 from app.lib.nma import NMA
 from app.lib.nmwp import NMWP
@@ -70,6 +71,7 @@ class ConfigController(BaseController):
               'PROWL.enabled', 'PROWL.onSnatch',
               'GROWL.enabled', 'GROWL.onSnatch',
               'Notifo.enabled', 'Notifo.onSnatch',
+              'SNS.enabled', 'SNS.onSnatch',
               'Boxcar.enabled', 'Boxcar.onSnatch',
               'NMA.enable', 'NMA.onSnatch',
               'NMWP.enable', 'NMWP.onSnatch',
@@ -175,6 +177,14 @@ class ConfigController(BaseController):
 
         notifo = Notifo()
         notifo.test(data.get('Notifo.username'), data.get('Notifo.key'))
+
+        return ''
+
+    @cherrypy.expose
+    def testSNS(self, **data):
+
+        sns = SNS()
+        sns.test(data.get('SNS.key'))
 
         return ''
     

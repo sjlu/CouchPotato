@@ -217,6 +217,11 @@ class configApp():
         self.setDefault('Notifo', 'username', '')
         self.setDefault('Notifo', 'key', '')
 
+        self.addSection('SNS')
+        self.setDefault('SNS', 'enabled', False)
+        self.setDefault('SNS', 'onSnatch', False)
+        self.setDefault('SNS', 'key', '')
+
         self.addSection('Boxcar')
         self.setDefault('Boxcar', 'enabled', False)
         self.setDefault('Boxcar', 'onSnatch', False)

@@ -11,6 +11,7 @@ from app.lib.xbmc import XBMC
 from app.lib.prowl import PROWL
 from app.lib.growl import GROWL
 from app.lib.notifo import Notifo
+from app.lib.sns import SNS
 from app.lib.boxcar import Boxcar
 from app.lib.nma import NMA
 from app.lib.nmwp import NMWP
@@ -220,6 +221,12 @@ class YarrCron(cronBase, rss):
                             log.debug('Notifo')
                             notifo = Notifo()
                             notifo.notify('%s' % highest.name, "Snatched:")
+
+                        # Notify SNS
+                        if self.config.get('SNS', 'onSnatch'):
+                            log.debug('SNS')
+                            sns = SNS()
+                            sns.notify('%s' % highest.name, "Snatched:")
 
                         # Notify Boxcar
                         if self.config.get('Boxcar', 'onSnatch'):
