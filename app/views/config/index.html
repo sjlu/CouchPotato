@@ -991,6 +991,36 @@
 					<a href="#notifoTest" id="notifoTest" class="testNotification">Send a message to Notifo, see if it works.</a>
 				</div>
 			</fieldset>
+
+			<fieldset class="inlineLabels" id="snsFieldset">
+				<h3>SNS</h3>
+				<div class="ctrlHolder checkbox">
+					<label>Enabled</label>
+					<input type="checkbox" name="SNS.enabled" value="True" ${' checked="checked"' if config.get('SNS', 'enabled') else ''} />
+					<p class="formHint">
+						Sends a notification to SNS
+					</p>
+				</div>
+				<div class="ctrlHolder checkbox">
+					<label>Also on snatched</label>
+					<input type="checkbox" name="SNS.onSnatch" value="True" ${' checked="checked"' if config.get('SNS', 'onSnatch') else ''} />
+					<p class="formHint">
+						Also send a notification when a movie is snatched.
+					</p>
+				</div>
+				<div class="ctrlHolder">
+					<label>API Key</label>
+					<input type="text" name="SNS.key" value="${config.get('SNS', 'key')}" class="textInput large" />
+					<p class="formHint">
+						Get your API secret at:
+						<a href="http://sns.burst-dev.com/" target="blank">http://sns.burst-dev.com</a>
+					</p>
+				</div>
+				<div class="ctrlHolder">
+					<a href="#snsTest" id="snsTest" class="testNotification">Send a message to SNS, see if it works.</a>
+				</div>
+			</fieldset>
+
 			<fieldset class="inlineLabels" id="boxcarFieldset">
 				<h3>Boxcar</h3>
 				<div class="ctrlHolder checkbox">
@@ -1261,7 +1291,7 @@
 	        }
 	    }
 		
-		Array.each(['renamingFieldset','torrentsFieldset','nzbsFieldset','nzbmatrixFieldset','nzbsorgFieldset','newznabFieldset','subtitleFieldset', 'xbmcFieldset', 'nmjFieldset', 'plexFieldset', 'prowlFieldset', 'growlFieldset', 'notifoFieldset', 'boxcarFieldset', 'nmaFieldset', 'twitterFieldset', 'synoIndexFieldset', 'traktNotificationFieldset'],function(item){
+		Array.each(['renamingFieldset','torrentsFieldset','nzbsFieldset','nzbmatrixFieldset','nzbsorgFieldset','newznabFieldset','subtitleFieldset', 'xbmcFieldset', 'nmjFieldset', 'plexFieldset', 'prowlFieldset', 'growlFieldset', 'notifoFieldset', 'snsFieldset', 'boxcarFieldset', 'nmaFieldset', 'twitterFieldset', 'synoIndexFieldset', 'traktNotificationFieldset'],function(item){
 		    var fieldset = $(item)
 		    var checkbox = fieldset.getElement('[type=checkbox]')
 		    isEnabled(checkbox, fieldset)
@@ -1368,6 +1398,13 @@
 			new Request({
 				'url': './testNotifo/',
 				'data': $('notifoFieldset')
+			}).send()
+		})
+		$('snsTest').addEvent('click', function(e){
+			(e).stop()
+			new Request({
+				'url': './testSNS/',
+				'data': $('snsFieldset')
 			}).send()
 		})
 		$('boxcarTest').addEvent('click', function(e){

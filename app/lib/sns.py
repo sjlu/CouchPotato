@@ -16,7 +16,7 @@ class SNS:
         pass
 
     def conf(self, options):
-        return cherrypy.config['config'].get('Notifo', options)
+        return cherrypy.config['config'].get('SNS', options)
 
     def send(self, message, status):
 
