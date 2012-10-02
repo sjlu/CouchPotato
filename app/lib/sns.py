@@ -20,7 +20,7 @@ class SNS:
 
     def send(self, message, status):
 
-        url = 'http://sns.burst-dev.com/notification'
+        url = 'http://sns.burst-dev.com/api/notification'
 
         try:
             message = message.strip()
